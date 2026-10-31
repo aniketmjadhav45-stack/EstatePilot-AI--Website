@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   UserCheck,
   Home,
@@ -42,6 +43,30 @@ export const AiAgentCenter: React.FC<AiAgentCenterProps> = ({ onOpenEarlyAccess 
   };
 
   const activeAgent = AI_AGENTS.find((a) => a.id === activeAgentId) || AI_AGENTS[0];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const agentCardVariants = {
+    hidden: { opacity: 0, y: 32, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.55,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
 
   const handleSimulate = (agent: AiAgent) => {
     setSimulatingAgentId(agent.id);
@@ -99,71 +124,91 @@ export const AiAgentCenter: React.FC<AiAgentCenterProps> = ({ onOpenEarlyAccess 
           </div>
         </div>
 
-        {/* VIEW 1: PREMIUM AGENT CARDS GRID */}
-        {viewMode === 'grid' && (
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {AI_AGENTS.map((agent) => {
-              const Icon = iconMap[agent.iconName] || Sparkles;
-              return (
-                <div
-                  key={agent.id}
-                  className="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 hover:bg-slate-900 transition-all group"
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-11 h-11 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <span className="text-[11px] font-mono font-medium text-emerald-400 bg-emerald-950/60 border border-emerald-900 px-2 py-0.5 rounded">
-                        Active Fleet
-                      </span>
-                    </div>
-
-                    <div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
-                        {agent.name}
-                      </h3>
-                      <div className="text-xs text-indigo-400 font-mono mt-0.5">{agent.shortRole}</div>
-                    </div>
-
-                    <p className="text-xs text-slate-300 leading-relaxed">{agent.description}</p>
-
-                    <div className="space-y-1.5 pt-2 border-t border-slate-800/80">
-                      <div className="text-[11px] font-semibold uppercase text-slate-400">Core Workflows:</div>
-                      {agent.keyWorkflows.slice(0, 2).map((w) => (
-                        <div key={w} className="flex items-start gap-1.5 text-[11px] text-slate-300">
-                          <CheckCircle2 className="w-3 h-3 text-indigo-400 shrink-0 mt-0.5" />
-                          <span className="line-clamp-1">{w}</span>
+        {/* VIEW 1: PREMIUM AGENT CARDS GRID WITH FRAMER MOTION ENTRANCE */}
+        <AnimatePresence mode="wait">
+          {viewMode === 'grid' ? (
+            <motion.div
+              key="grid"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              exit={{ opacity: 0, y: -16, transition: { duration: 0.2 } }}
+              className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
+              {AI_AGENTS.map((agent) => {
+                const Icon = iconMap[agent.iconName] || Sparkles;
+                return (
+                  <motion.div
+                    key={agent.id}
+                    variants={agentCardVariants}
+                    whileHover={{
+                      y: -6,
+                      borderColor: 'rgba(99, 102, 241, 0.55)',
+                      boxShadow: '0 16px 32px -8px rgba(79, 70, 229, 0.3)',
+                      transition: { duration: 0.2 },
+                    }}
+                    className="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-6 flex flex-col justify-between hover:bg-slate-900 transition-colors group cursor-default"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="w-11 h-11 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-105 group-hover:bg-indigo-600/30 transition-all">
+                          <Icon className="w-5 h-5" />
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                        <span className="text-[11px] font-mono font-medium text-emerald-400 bg-emerald-950/60 border border-emerald-900 px-2 py-0.5 rounded">
+                          Active Fleet
+                        </span>
+                      </div>
 
-                  <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between">
-                    <div className="text-[10px] text-slate-400 flex items-center gap-1">
-                      <Lock className="w-3 h-3 text-emerald-400" />
-                      <span>Human Review Gate</span>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setActiveAgentId(agent.id);
-                        setViewMode('interactive');
-                      }}
-                      className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>Test Action</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
+                      <div>
+                        <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
+                          {agent.name}
+                        </h3>
+                        <div className="text-xs text-indigo-400 font-mono mt-0.5">{agent.shortRole}</div>
+                      </div>
 
-        {/* VIEW 2: INTERACTIVE AGENT SANDBOX */}
-        {viewMode === 'interactive' && (
-          <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start animate-in fade-in">
+                      <p className="text-xs text-slate-300 leading-relaxed">{agent.description}</p>
+
+                      <div className="space-y-1.5 pt-2 border-t border-slate-800/80">
+                        <div className="text-[11px] font-semibold uppercase text-slate-400">Core Workflows:</div>
+                        {agent.keyWorkflows.slice(0, 2).map((w) => (
+                          <div key={w} className="flex items-start gap-1.5 text-[11px] text-slate-300">
+                            <CheckCircle2 className="w-3 h-3 text-indigo-400 shrink-0 mt-0.5" />
+                            <span className="line-clamp-1">{w}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                      <div className="text-[10px] text-slate-400 flex items-center gap-1">
+                        <Lock className="w-3 h-3 text-emerald-400" />
+                        <span>Human Review Gate</span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setActiveAgentId(agent.id);
+                          setViewMode('interactive');
+                        }}
+                        className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1 cursor-pointer"
+                      >
+                        <span>Test Action</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="interactive"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.3 }}
+              className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+            >
             {/* Left: 8 Agent Directory (5 cols) */}
             <div className="lg:col-span-5 space-y-2">
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 px-1 mb-2">
@@ -307,9 +352,10 @@ export const AiAgentCenter: React.FC<AiAgentCenterProps> = ({ onOpenEarlyAccess 
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
-      </div>
-    </section>
+      </AnimatePresence>
+    </div>
+  </section>
   );
 };
