@@ -21,13 +21,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms, onOp
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Column (2 cols on lg) */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5 text-white font-bold text-xl tracking-tight">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-xs">
-                <Building className="w-4.5 h-4.5" />
-              </div>
-              <span>
-                EstatePilot <span className="text-indigo-400 font-semibold">AI</span>
-              </span>
+            {/* EstatePilot AI Official Brand Logo */}
+            <div className="inline-block bg-white px-3.5 py-1.5 rounded-xl shadow-sm">
+              <img
+                src="/assets/aistudio/EstatePilot_AI__Intelligent_Real_Estate_Growth_03824261.png"
+                alt="EstatePilot AI — Your Real Estate, Powered by Intelligence"
+                className="h-8 sm:h-9 w-auto object-contain"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
               Your Real Estate, Powered by Intelligence.

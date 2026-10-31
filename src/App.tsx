@@ -9,6 +9,8 @@ import { Hero } from './components/Hero';
 import { TrustStrip } from './components/TrustStrip';
 import { ProblemSection } from './components/ProblemSection';
 import { SolutionSection } from './components/SolutionSection';
+import { Spatial3DStudio } from './components/Spatial3DStudio';
+import { PropertyShowcase } from './components/PropertyShowcase';
 import { AiAgentCenter } from './components/AiAgentCenter';
 import { HowItWorks } from './components/HowItWorks';
 import { SolutionsByUser } from './components/SolutionsByUser';
@@ -36,7 +38,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">
-      {/* 1. Sticky Navigation */}
+      {/* 1. Sticky Navigation with Brand Logo */}
       <Navbar
         onOpenEarlyAccess={() => setEarlyAccessOpen(true)}
         onOpenSignIn={() => setSignInOpen(true)}
@@ -55,26 +57,32 @@ export default function App() {
         {/* 5. Solution Section (10 Features) */}
         <SolutionSection onOpenEarlyAccess={() => setEarlyAccessOpen(true)} />
 
-        {/* 6. AI Agent Center (8 Specialist Agents) */}
+        {/* 6. Interactive 3D Spatial Digital Twin Studio */}
+        <Spatial3DStudio onOpenEarlyAccess={() => setEarlyAccessOpen(true)} />
+
+        {/* 7. Luxury Property Showcase with Architectural Visuals & Floorplans */}
+        <PropertyShowcase onOpenEarlyAccess={() => setEarlyAccessOpen(true)} />
+
+        {/* 7. AI Agent Center (8 Specialist Agents) */}
         <AiAgentCenter onOpenEarlyAccess={() => setEarlyAccessOpen(true)} />
 
-        {/* 7. How It Works (Connect, Automate, Grow) */}
+        {/* 8. How It Works (Connect, Automate, Grow) */}
         <HowItWorks />
 
-        {/* 8. Solutions by User (Solo Agents, Brokerages, Multi-Branch, Enterprise) */}
+        {/* 9. Solutions by User (Individual Agents, Agencies, Brokerages, Enterprise) */}
         <SolutionsByUser onOpenEarlyAccess={() => setEarlyAccessOpen(true)} />
 
-        {/* 9. Security & Control */}
+        {/* 10. Security & Control */}
         <SecuritySection />
 
-        {/* Pricing / Founding Member Tier Overview */}
+        {/* 11. Pricing / Illustrative Tiers */}
         <PricingPreview onOpenEarlyAccess={() => setEarlyAccessOpen(true)} />
 
-        {/* 10. Final Call to Action */}
+        {/* 12. Final Call to Action */}
         <FinalCta onOpenEarlyAccess={() => setEarlyAccessOpen(true)} />
       </main>
 
-      {/* 11. Footer */}
+      {/* 13. Footer */}
       <Footer
         onOpenPrivacy={() => setLegalModalType('privacy')}
         onOpenTerms={() => setLegalModalType('terms')}

@@ -13,11 +13,11 @@ export const SolutionsByUser: React.FC<SolutionsByUserProps> = ({ onOpenEarlyAcc
 
   const getIcon = (id: string) => {
     switch (id) {
-      case 'solo-agents':
+      case 'individual-agents':
         return User;
-      case 'brokerages':
+      case 'agencies':
         return Building;
-      case 'multi-branch':
+      case 'brokerages':
         return Landmark;
       case 'enterprise':
         return Network;
@@ -38,14 +38,14 @@ export const SolutionsByUser: React.FC<SolutionsByUserProps> = ({ onOpenEarlyAcc
             Engineered for Every Scale of Real Estate.
           </h2>
           <p className="text-base sm:text-lg text-slate-600 text-balance leading-relaxed">
-            Whether you are a solo high-producer closing 40 deals a year or an enterprise network managing 500+ agents
-            across continents, EstatePilot AI adapts to your operational structure.
+            Whether you are an individual top-producing agent, a high-velocity agency, an established brokerage, or a
+            multi-national enterprise team, EstatePilot AI is architected for your operational workflow.
           </p>
         </div>
 
-        {/* Clean Segmented Tab Navigation */}
+        {/* Clean Segmented Tab Navigation: Individual Agents, Agencies, Brokerages, Enterprise Teams */}
         <div className="mt-12 flex justify-center">
-          <div className="inline-flex p-1.5 bg-slate-200/80 rounded-xl max-w-full overflow-x-auto">
+          <div className="inline-flex p-1.5 bg-slate-200/80 rounded-xl max-w-full overflow-x-auto scrollbar-none">
             {USER_SOLUTIONS.map((item) => {
               const Icon = getIcon(item.id);
               const isActive = selectedSolutionId === item.id;
@@ -85,6 +85,11 @@ export const SolutionsByUser: React.FC<SolutionsByUserProps> = ({ onOpenEarlyAcc
                 <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                   {selected.description}
                 </p>
+                {selected.bestFor && (
+                  <p className="text-xs text-indigo-700 bg-indigo-50/70 border border-indigo-100 p-2.5 rounded-lg mt-3">
+                    <strong>Recommended Scope: </strong> {selected.bestFor}
+                  </p>
+                )}
               </div>
 
               {/* Key Benefits */}

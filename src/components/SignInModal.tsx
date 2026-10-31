@@ -42,12 +42,15 @@ export const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onLau
           <X className="w-5 h-5" />
         </button>
 
-        <div className="text-center space-y-2">
-          <div className="w-11 h-11 rounded-xl bg-slate-950 text-white mx-auto flex items-center justify-center shadow-xs">
-            <Building className="w-6 h-6 text-indigo-400" />
-          </div>
-          <h3 className="text-2xl font-bold text-slate-950">Sign In to EstatePilot AI</h3>
-          <p className="text-xs text-slate-600">Access your firm’s real estate operating workspace</p>
+        <div className="text-center space-y-3">
+          <img
+            src="/assets/aistudio/EstatePilot_AI__Intelligent_Real_Estate_Growth_03824261.png"
+            alt="EstatePilot AI"
+            className="h-10 w-auto mx-auto object-contain"
+            referrerPolicy="no-referrer"
+          />
+          <h3 className="text-xl font-bold text-slate-950">Sign In to Your Workspace</h3>
+          <p className="text-xs text-slate-600">Access your firm’s real estate operating platform</p>
         </div>
 
         {/* Quick Demo Access Callout */}

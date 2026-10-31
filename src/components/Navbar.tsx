@@ -20,6 +20,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEarlyAccess, onOpenSignIn 
 
   const navLinks = [
     { label: 'Product', href: '#product' },
+    { label: '3D Studio', href: '#spatial-studio' },
     { label: 'Solutions', href: '#solutions' },
     { label: 'Features', href: '#features' },
     { label: 'AI Agents', href: '#ai-agents' },
@@ -46,17 +47,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEarlyAccess, onOpenSignIn 
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-8 h-18">
-          {/* Zone 1: Single text element wordmark */}
+          {/* Zone 1: EstatePilot AI Brand Logo */}
           <a
             href="/"
-            className="flex items-center gap-2.5 text-slate-950 font-bold text-xl tracking-tight whitespace-nowrap shrink-0 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-md"
+            className="flex items-center whitespace-nowrap shrink-0 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-md py-1"
           >
-            <div className="w-9 h-9 rounded-lg bg-slate-950 text-white flex items-center justify-center shadow-xs transition-transform group-hover:scale-105">
-              <Building className="w-5 h-5 text-indigo-400" />
-            </div>
-            <span>
-              EstatePilot <span className="text-indigo-600 font-semibold">AI</span>
-            </span>
+            <img
+              src="/assets/aistudio/EstatePilot_AI__Intelligent_Real_Estate_Growth_03824261.png"
+              alt="EstatePilot AI — Your Real Estate, Powered by Intelligence"
+              className="h-9 sm:h-10 w-auto object-contain transition-transform group-hover:scale-102"
+              referrerPolicy="no-referrer"
+            />
           </a>
 
           {/* Zone 2: Clean single-line text navigation links */}

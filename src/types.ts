@@ -10,6 +10,7 @@ export interface LeadItem {
   status: 'Hot' | 'Warm' | 'Nurturing' | 'Under Offer';
   lastActivity: string;
   aiInsight: string;
+  source: string;
 }
 
 export interface PropertyItem {
@@ -29,6 +30,17 @@ export interface PropertyItem {
   matchedBuyersCount: number;
   architecturalStyle: string;
   gradientBg: string;
+  daysOnMarket: number;
+}
+
+export interface PropertyMatch {
+  id: string;
+  propertyTitle: string;
+  buyerName: string;
+  matchPercentage: number;
+  matchCriteria: string[];
+  suggestedAction: string;
+  status: 'Ready to Pitch' | 'Proposed' | 'Tour Requested';
 }
 
 export interface VisitItem {
@@ -40,6 +52,7 @@ export interface VisitItem {
   agentName: string;
   status: 'Confirmed' | 'Pending Client' | 'Completed';
   accessNotes: string;
+  type: 'In-Person VIP Tour' | 'Broker Preview' | 'Virtual 3D Walkthrough';
 }
 
 export interface PipelineStage {
@@ -47,7 +60,15 @@ export interface PipelineStage {
   name: string;
   count: number;
   totalValue: string;
+  numericValue: number;
   color: string;
+}
+
+export interface RevenueMetric {
+  month: string;
+  closedVolume: number;
+  projectedVolume: number;
+  commissionGross: string;
 }
 
 export interface AiAgent {
@@ -73,14 +94,28 @@ export interface UserSolution {
   keyBenefits: string[];
   recommendedWorkflows: string[];
   badge: string;
+  bestFor: string;
+}
+
+export interface PricingTier {
+  id: string;
+  name: string;
+  tierBadge: string;
+  headline: string;
+  illustrativeMonthlyPrice: string;
+  illustrativeAnnualPrice: string;
+  billingNote: string;
+  targetAudience: string;
+  features: string[];
+  highlighted: boolean;
 }
 
 export interface EarlyAccessFormData {
   fullName: string;
   workEmail: string;
-  phone: string;
-  brokerageName: string;
+  companyName: string;
   role: string;
-  teamSize: string;
-  primaryGoal: string;
+  country: string;
+  phone?: string;
+  teamSize?: string;
 }

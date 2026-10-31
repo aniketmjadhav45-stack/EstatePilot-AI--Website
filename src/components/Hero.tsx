@@ -44,7 +44,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEarlyAccess }) => {
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <button
               onClick={onOpenEarlyAccess}
               className="w-full sm:w-auto px-6 py-3.5 text-base font-semibold text-white bg-slate-950 hover:bg-slate-800 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer group"
@@ -53,10 +53,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEarlyAccess }) => {
               <ArrowRight className="w-4 h-4 text-indigo-300 transition-transform group-hover:translate-x-0.5" />
             </button>
             <button
-              onClick={handleScrollToProduct}
-              className="w-full sm:w-auto px-6 py-3.5 text-base font-medium text-slate-700 hover:text-slate-950 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-xl transition-all shadow-xs flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+              onClick={() => {
+                const el = document.getElementById('spatial-studio');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="w-full sm:w-auto px-5 py-3.5 text-base font-semibold text-indigo-700 bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 rounded-xl transition-all shadow-xs flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
             >
-              <span>Explore the Platform</span>
+              <Sparkles className="w-4 h-4 text-indigo-600" />
+              <span>Interactive 3D Twin</span>
+            </button>
+            <button
+              onClick={handleScrollToProduct}
+              className="w-full sm:w-auto px-5 py-3.5 text-base font-medium text-slate-700 hover:text-slate-950 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-xl transition-all shadow-xs flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+            >
+              <span>Explore Platform</span>
               <ChevronDown className="w-4 h-4 text-slate-400" />
             </button>
           </div>
